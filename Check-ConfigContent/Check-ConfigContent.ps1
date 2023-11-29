@@ -25,9 +25,8 @@ $CheckContent = `
 "Some Content",
 "Other Stuff"
 
-$sessions = New-PSSession -ComputerName $servers
 
-$output = Invoke-Command -Session $sessions -ArgumentList $CheckRootFolder,$CheckFiles,$CheckContent -ScriptBlock {
+$output = Invoke-Command -ComputerName $sessions -ArgumentList $CheckRootFolder,$CheckFiles,$CheckContent -ScriptBlock {
     write-host $env:ComputerName -ForegroundColor Green
     $RFIFolders = Get-ChildItem -Path $args[0] 
 
@@ -62,5 +61,3 @@ $output = Invoke-Command -Session $sessions -ArgumentList $CheckRootFolder,$Chec
 }
 
 $output
-
-$sessions | Remove-PSSession
